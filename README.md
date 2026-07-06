@@ -1,6 +1,6 @@
 # ISYLNTMWWITINS.com
 
-A one-screen My Chemical Romance appreciation micro-site. Elevated-minimal, Black Parade palette (near-black · bone · one arterial red), set like a single specimen: *In English* `=` *In Emo*. The one interaction — the acronym **ISYLNTMWWITINS** *decodes* into the *Famous Last Words* line it stands for (hover on desktop, tap on mobile), the red initials staying lit inside the bone-white sentence.
+A My Chemical Romance appreciation micro-site. Flat black, type only: the domain name itself set as a wall-to-wall typographic monument in arterial red. The one interaction — the monument *decodes* into the *Famous Last Words* line it stands for (hover on desktop, tap on mobile), red initials staying lit inside the bone-white sentence. Below the fold: the story, told like liner notes.
 
 The whole site is one self-contained file: **`index.html`** (inline CSS + JS, Bodoni Moda + IBM Plex Mono via Google Fonts). No build step, no dependencies.
 
