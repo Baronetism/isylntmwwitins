@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ISYLNTMWWITINS — an emo love declaration</title>
+  <meta name="description" content="In English we say, “I love you.” In Emo we say, ISYLNTMWWITINS. A My Chemical Romance appreciation page." />
+  <!-- favicon: the "=" mark, in red -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0a0a'/%3E%3Crect x='28' y='41' width='44' height='7' fill='%23c0141c'/%3E%3Crect x='28' y='56' width='44' height='7' fill='%23c0141c'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg:    #0a0a0a;
+      --ink:   #ece6da;                       /* bone — hero statements */
+      --text:  rgba(236, 230, 218, 0.72);     /* body copy      ~8.6:1  */
+      --label: rgba(236, 230, 218, 0.60);     /* labels/system  ~6.3:1  */
+      --soft:  rgba(236, 230, 218, 0.55);     /* captions/sign  ~5.4:1  */
+      --hair:  rgba(236, 230, 218, 0.13);     /* hairlines (decorative) */
+      --red:   #c0141c;                        /* arterial accent        */
+      --red-hot: #e8353d;
+      --display: "Bodoni Moda", "Didot", "Times New Roman", serif;
+      --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+      --pad: clamp(1.5rem, 6vw, 5.5rem);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body { height: 100%; background: var(--bg); color: var(--ink); }
+    body {
+      font-family: var(--display);
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    /* whisper of film grain — texture only, no heavy vignette */
+    .grain {
+      position: fixed;
+      inset: -50%;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.03;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      animation: grain 7s steps(6) infinite;
+    }
+    @keyframes grain {
+      0%,100% { transform: translate(0,0); }
+      25% { transform: translate(-5%, 3%); }
+      50% { transform: translate(3%, -6%); }
+      75% { transform: translate(5%, 2%); }
+    }
+
+    /* ---------- stage: masthead · hero · colophon ---------- */
+    .stage {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: clamp(1.5rem, 4.5vh, 2.6rem) var(--pad);
+    }
+
+    /* ---- masthead ---- */
+    .masthead {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: clamp(1rem, 2.4vh, 1.5rem);
+      border-bottom: 1px solid var(--hair);
+      font-family: var(--mono);
+      font-size: clamp(0.58rem, 0.95vw, 0.72rem);
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--label);
+    }
+    .masthead .tag { text-align: right; }
+    .masthead .sep { color: var(--red); }
+
+    /* ---- hero ---- */
+    .hero {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-inner { max-width: 60ch; }
+
+    .label {
+      font-family: var(--mono);
+      font-size: clamp(0.6rem, 0.95vw, 0.72rem);
+      font-weight: 400;
+      letter-spacing: 0.36em;
+      text-transform: uppercase;
+      color: var(--label);
+      display: block;
+    }
+    .en-label   { margin-bottom: clamp(0.8rem, 2vh, 1.3rem); }
+    .emo-label  { margin-bottom: clamp(0.8rem, 2vh, 1.3rem); }
+
+    .english {
+      font-weight: 500;
+      font-style: italic;
+      font-size: clamp(2.2rem, 7vw, 4.6rem);
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    /* the ownable device: English = Emo */
+    .pivot {
+      display: block;
+      font-family: var(--mono);
+      font-weight: 500;
+      color: var(--red);
+      font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+      line-height: 1;
+      margin: clamp(1.1rem, 3.2vh, 2.1rem) 0;
+      text-shadow: 0 0 20px rgba(192, 20, 28, 0.35);
+    }
+
+    /* ---- the acronym / reveal ---- */
+    .acronym {
+      font-family: var(--mono);
+      font-weight: 500;
+      font-size: clamp(1.3rem, 3.7vw, 2.4rem);
+      letter-spacing: 0.02em;
+      color: var(--red);
+      background: none; border: 0;
+      padding: 0.35em 0.2em;                 /* ≥44px tap target */
+      margin: -0.1em 0;
+      cursor: pointer;
+      line-height: 1.3;
+      display: inline;
+      text-decoration: underline dotted;
+      text-decoration-color: rgba(192, 20, 28, 0.5);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 0.32em;
+      text-shadow: 0 0 22px rgba(192, 20, 28, 0.24);
+      transition: text-shadow 0.6s ease, letter-spacing 0.6s ease,
+                  text-decoration-color 0.4s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .acronym:focus-visible { outline: 1px dashed var(--red); outline-offset: 8px; }
+
+    .word { white-space: nowrap; }
+    .ini  { color: var(--red); }
+    .rest {
+      color: var(--ink);
+      display: inline-block;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      vertical-align: bottom;
+      transition: max-width 0.6s cubic-bezier(0.19, 0.8, 0.2, 1), opacity 0.5s ease;
+      transition-delay: calc(var(--i) * 22ms);
+    }
+    .gap {
+      display: inline-block;
+      max-width: 0;
+      overflow: hidden;
+      transition: max-width 0.6s cubic-bezier(0.19, 0.8, 0.2, 1);
+      transition-delay: calc(var(--i) * 22ms);
+    }
+    .gap::before { content: "\00a0"; }
+
+    .acronym.open {
+      letter-spacing: 0.004em;
+      text-decoration-color: transparent;
+      text-shadow: 0 0 30px rgba(232, 53, 61, 0.38);
+    }
+    .acronym.open .rest { max-width: 16ch; opacity: 1; }
+    .acronym.open .gap  { max-width: 0.42em; }
+
+    /* ---- caption / affordance ---- */
+    .caption {
+      display: block;
+      margin-top: clamp(1.2rem, 3.4vh, 2.2rem);
+      font-family: var(--mono);
+      font-size: clamp(0.56rem, 0.92vw, 0.68rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--soft);
+      transition: opacity 0.45s ease;
+    }
+    .caption b { color: var(--red); font-weight: 400; }
+    .caption.is-hidden { animation: none; opacity: 0; pointer-events: none; }
+
+    /* ---- colophon ---- */
+    .colophon {
+      padding-top: clamp(1rem, 2.4vh, 1.5rem);
+      border-top: 1px solid var(--hair);
+      text-align: center;
+    }
+    .colophon .note {
+      max-width: 58ch;
+      margin: 0 auto;
+      font-size: clamp(0.8rem, 1.05vw, 0.95rem);
+      line-height: 1.62;
+      font-weight: 400;
+      color: var(--text);
+    }
+    .colophon .note em { font-style: italic; color: var(--ink); }
+    .colophon .sign {
+      display: block;
+      margin-top: clamp(0.7rem, 1.5vh, 1rem);
+      font-family: var(--mono);
+      font-size: clamp(0.56rem, 0.85vw, 0.66rem);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--soft);
+    }
+    .colophon .sign .sep { color: var(--red); }
+
+    /* ---------- entrance ---------- */
+    .rise { opacity: 0; transform: translateY(12px); animation: rise 1.1s cubic-bezier(0.2, 0.75, 0.2, 1) forwards; animation-delay: var(--d, 0s); }
+    @keyframes rise { to { opacity: 1; transform: translateY(0); } }
+    .fade { opacity: 0; animation: fade 1.3s ease forwards; animation-delay: var(--d, 0s); }
+    @keyframes fade { to { opacity: 1; } }
+
+    /* ---------- mobile / touch: scroll, keep it centered & calm ---------- */
+    @media (hover: none), (max-width: 720px), (max-height: 600px) {
+      body { height: auto; min-height: 100dvh; overflow-y: auto; }
+      .stage { height: auto; min-height: 100dvh; }
+      .hero {
+        flex: 0 0 auto;
+        padding: clamp(3rem, 12vh, 6rem) 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .grain { animation: none; }
+      .rise, .fade { animation: none; opacity: 1; transform: none; }
+      .rest { transition: opacity 0.35s ease; max-width: 16ch; }
+      .acronym:not(.open) .rest { max-width: 0; opacity: 0; }
+      .gap  { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="stage">
+    <header class="masthead fade" style="--d:.15s">
+      <span class="mark">ISYLNTMWWITINS.COM</span>
+      <span class="tag">A Fan Tribute <span class="sep">·</span> MMXXVI</span>
+    </header>
+
+    <main class="hero">
+      <div class="hero-inner">
+        <span class="label en-label rise" style="--d:.3s">In English, we say</span>
+        <div class="english rise" style="--d:.4s">&ldquo;I love you.&rdquo;</div>
+
+        <div class="pivot rise" style="--d:.5s" aria-hidden="true">=</div>
+
+        <span class="label emo-label rise" style="--d:.6s">In Emo, we say</span>
+        <button class="acronym rise" id="acronym" type="button" style="--d:.7s" aria-expanded="false"
+                aria-label="ISYLNTMWWITINS — I see you lying next to me with words I thought I'd never speak"><span aria-hidden="true"><span class="word"><span class="ini">I</span></span><span class="gap" style="--i:1"></span><span class="word"><span class="ini">S</span><span class="rest" style="--i:2">ee</span></span><span class="gap" style="--i:2"></span><span class="word"><span class="ini">Y</span><span class="rest" style="--i:3">ou</span></span><span class="gap" style="--i:3"></span><span class="word"><span class="ini">L</span><span class="rest" style="--i:4">ying</span></span><span class="gap" style="--i:4"></span><span class="word"><span class="ini">N</span><span class="rest" style="--i:5">ext</span></span><span class="gap" style="--i:5"></span><span class="word"><span class="ini">T</span><span class="rest" style="--i:6">o</span></span><span class="gap" style="--i:6"></span><span class="word"><span class="ini">M</span><span class="rest" style="--i:7">e</span></span><span class="gap" style="--i:7"></span><span class="word"><span class="ini">W</span><span class="rest" style="--i:8">ith</span></span><span class="gap" style="--i:8"></span><span class="word"><span class="ini">W</span><span class="rest" style="--i:9">ords</span></span><span class="gap" style="--i:9"></span><span class="word"><span class="ini">I</span></span><span class="gap" style="--i:10"></span><span class="word"><span class="ini">T</span><span class="rest" style="--i:11">hought</span></span><span class="gap" style="--i:11"></span><span class="word"><span class="ini">I</span><span class="rest" style="--i:12">&rsquo;d</span></span><span class="gap" style="--i:12"></span><span class="word"><span class="ini">N</span><span class="rest" style="--i:13">ever</span></span><span class="gap" style="--i:13"></span><span class="word"><span class="ini">S</span><span class="rest" style="--i:14">peak</span></span><span class="ini">.</span></span></button>
+        <span class="caption rise" id="caption" style="--d:.85s"><b>‹</b> hover to translate <b>›</b></span>
+      </div>
+    </main>
+
+    <footer class="colophon fade" style="--d:1s">
+      <p class="note">
+        Made by one fan, twenty years deep. I was ten when <em>The Black Parade</em> taught me
+        that grief could sound like a brass band and a battle cry at the same time &mdash; it has
+        been my favorite record ever since, and I don&rsquo;t expect that to change. This domain
+        was just sitting there, free. It felt like the loudest way to say the quietest thing.
+        Every ounce of credit belongs to My Chemical Romance &mdash; the band, the album, the
+        song, and Gerard Way, who gave so many of us somewhere to put it all.
+      </p>
+      <span class="sign">not affiliated <span class="sep">·</span> just grateful <span class="sep">·</span> forever</span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var acr = document.getElementById("acronym");
+      var cap = document.getElementById("caption");
+      if (!acr) return;
+
+      var rests = Array.prototype.slice.call(acr.querySelectorAll(".rest"));
+      rests.forEach(function (r) { r.dataset.final = r.textContent; });
+
+      var reduce   = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var canHover = window.matchMedia("(hover: hover)").matches;
+      if (!canHover && cap) cap.innerHTML = "<b>‹</b> tap to translate <b>›</b>";
+
+      var GLYPHS = "ABCDEFGHIJKLMNPQRSTUVWXYZ0123456789#%&*/+<>";
+      var gen = 0, isOpen = false;
+
+      function randStr(n) {
+        var s = "";
+        for (var i = 0; i < n; i++) s += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+        return s;
+      }
+
+      function decode(myGen) {
+        rests.forEach(function (r, idx) {
+          var final = r.dataset.final || "";
+          if (!final.length) return;
+          var t0 = performance.now(), delay = idx * 38, dur = 300;
+          function step(now) {
+            if (myGen !== gen || !isOpen) return;      // aborted by a close/reopen
+            var t = now - t0 - delay;
+            if (t < 0) { r.textContent = randStr(final.length); requestAnimationFrame(step); return; }
+            var p = Math.min(1, t / dur);
+            var reveal = Math.floor(p * final.length);
+            var out = final.slice(0, reveal);
+            for (var i = reveal; i < final.length; i++) out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
+            r.textContent = out;
+            if (p < 1) requestAnimationFrame(step);
+            else r.textContent = final;
+          }
+          requestAnimationFrame(step);
+        });
+      }
+
+      function open() {
+        if (isOpen) return;
+        isOpen = true; gen++;
+        acr.classList.add("open");
+        acr.setAttribute("aria-expanded", "true");
+        if (cap) cap.classList.add("is-hidden");
+        if (!reduce) decode(gen);
+      }
+      function close() {
+        if (!isOpen) return;
+        isOpen = false; gen++;
+        acr.classList.remove("open");
+        acr.setAttribute("aria-expanded", "false");
+        if (cap) cap.classList.remove("is-hidden");
+        rests.forEach(function (r) { r.textContent = r.dataset.final; });
+      }
+
+      // pointer-aware: mouse uses hover; touch/pen taps and keyboard toggle via click.
+      // Gating by pointerType avoids the hover-vs-click double-toggle on hybrid devices.
+      var lastPT = "mouse";
+      acr.addEventListener("pointerdown",  function (e) { lastPT = e.pointerType || "mouse"; });
+      acr.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") open(); });
+      acr.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") close(); });
+      acr.addEventListener("click", function (e) {
+        if (e.detail === 0 || lastPT !== "mouse") { isOpen ? close() : open(); }
+      });
+    })();
+  </script>
+</body>
+</html>
