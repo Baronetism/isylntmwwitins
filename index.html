@@ -9,7 +9,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -20,7 +20,7 @@
       --soft:  rgba(236, 230, 218, 0.55);
       --red:     #c8131c;
       --red-hot: #ff3b40;
-      --serif: "Bodoni Moda", "Didot", "Times New Roman", serif;
+      --serif: "Newsreader", Georgia, "Times New Roman", serif;
       --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
     }
 
@@ -29,6 +29,7 @@
     html, body { background: var(--bg); color: var(--ink); }
     body {
       font-family: var(--serif);
+      font-optical-sizing: auto;
       min-height: 100dvh;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
@@ -85,8 +86,8 @@
        lyric's height so the content above/below never shifts on hover */
     .sizer, .mono-inner {
       grid-area: 1 / 1;
-      max-width: 40ch;                   /* acronym on one line; lyric a compact 2–3 lines */
-      font-size: clamp(1rem, 2.4vw, 1.7rem);
+      max-width: 42ch;                   /* acronym on one line; lyric a compact 2–3 lines */
+      font-size: clamp(1.2rem, 2.9vw, 2.1rem);
       line-height: 1.4;
       letter-spacing: 0.01em;
     }
@@ -157,9 +158,10 @@
       margin-bottom: clamp(1.8rem, 4vh, 2.8rem);
     }
     .story p {
-      font-size: clamp(1rem, 1.3vw, 1.2rem);
-      line-height: 1.75;
-      color: var(--text);
+      font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+      line-height: 1.8;
+      font-weight: 400;
+      color: rgba(236, 230, 218, 0.86);
     }
     .story p + p { margin-top: clamp(1.2rem, 2.6vh, 1.8rem); }
     .story em { font-style: italic; color: var(--ink); }
