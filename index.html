@@ -64,11 +64,9 @@
 
     /* ---- the monument: acronym that unfolds into the lyric in place ---- */
     .monument {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
       width: 100%;
-      min-height: 3.9em;                 /* reserve ~3 lines so nothing jumps */
       background: none;
       border: 0;
       cursor: pointer;
@@ -77,14 +75,21 @@
       font-weight: 500;
       margin-top: clamp(0.9rem, 2.4vh, 1.6rem);
       -webkit-tap-highlight-color: transparent;
-      transition: color 0.6s ease;
     }
     .monument:focus-visible { outline: 1px dashed var(--red); outline-offset: 10px; }
 
-    .mono-inner {
+    /* both layers share one grid cell; the invisible sizer reserves the full
+       lyric's height so the content above/below never shifts on hover */
+    .sizer, .mono-inner {
+      grid-area: 1 / 1;
+      max-width: 100%;
       font-size: clamp(1.5rem, 6vw, 5rem);
       line-height: 1.24;
       letter-spacing: 0.01em;
+    }
+    .sizer { visibility: hidden; pointer-events: none; word-spacing: 0.02em; }
+
+    .mono-inner {
       word-spacing: -0.6em;              /* collapsed: gaps closed → the acronym */
       transition: word-spacing 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
@@ -100,8 +105,7 @@
       transition-delay: calc(var(--i) * 28ms);
     }
 
-    /* open: colour eases red → bone, each word unfurls from its letter */
-    .monument.open { color: var(--ink); }
+    /* open: each word unfurls from its letter — stays red throughout */
     .monument.open .mono-inner { word-spacing: 0.02em; }
     .monument.open .r { max-width: 20ch; opacity: 1; }
 
@@ -208,6 +212,7 @@
 
     <button class="monument rise" id="monument" type="button" style="--d:.55s" aria-expanded="false"
             aria-label="ISYLNTMWWITINS — I see you lying next to me with words I thought I'd never speak">
+      <span class="sizer" aria-hidden="true">I See You Lying Next To Me With Words I Thought I&rsquo;d Never Speak.</span>
       <span class="mono-inner" aria-hidden="true"><span class="w">I</span> <span class="w">S<span class="r" style="--i:1">ee</span></span> <span class="w">Y<span class="r" style="--i:2">ou</span></span> <span class="w">L<span class="r" style="--i:3">ying</span></span> <span class="w">N<span class="r" style="--i:4">ext</span></span> <span class="w">T<span class="r" style="--i:5">o</span></span> <span class="w">M<span class="r" style="--i:6">e</span></span> <span class="w">W<span class="r" style="--i:7">ith</span></span> <span class="w">W<span class="r" style="--i:8">ords</span></span> <span class="w">I</span> <span class="w">T<span class="r" style="--i:10">hought</span></span> <span class="w">I<span class="r" style="--i:11">&rsquo;d</span></span> <span class="w">N<span class="r" style="--i:12">ever</span></span> <span class="w">S<span class="r" style="--i:13">peak</span></span>.</span>
     </button>
 
