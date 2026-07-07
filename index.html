@@ -295,12 +295,18 @@
 
       /* the reveal is pure CSS unfold — JS only toggles state */
       var isOpen = false;
+      var counted = false;
       function open() {
         if (isOpen) return;
         isOpen = true;
         btn.classList.add("open");
         btn.setAttribute("aria-expanded", "true");
         if (cap) cap.classList.add("is-hidden");
+        // count how many visitors discover the reveal (once per visit)
+        if (!counted && window.goatcounter && window.goatcounter.count) {
+          counted = true;
+          window.goatcounter.count({ path: "lyric-revealed", title: "Lyric revealed", event: true });
+        }
       }
       function close() {
         if (!isOpen) return;
@@ -340,5 +346,9 @@
       revealFx();
     })();
   </script>
+
+  <!-- Analytics: GoatCounter (free, privacy-friendly, no cookies). Dashboard: isylntmwwitins.goatcounter.com -->
+  <script data-goatcounter="https://isylntmwwitins.goatcounter.com/count"
+          async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
