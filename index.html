@@ -195,10 +195,11 @@
     .song {
       color: var(--red);
       text-decoration: none;
-      white-space: nowrap;
+      text-underline-offset: 0.2em;
       transition: color 0.25s ease;
     }
-    .song:hover, .song:focus-visible { color: var(--red-hot); text-decoration: underline; text-underline-offset: 0.25em; outline: none; }
+    .song.album { font-style: italic; }
+    .song:hover, .song:focus-visible { color: var(--red-hot); text-decoration: underline; outline: none; }
 
     .signoff {
       display: block;
@@ -253,11 +254,12 @@
 
     <p class="fx">
       Whenever my parents were fighting, I used to put my headphones on and blast
-      <em>&ldquo;Dead!&rdquo;</em> because Gerard could scream louder than they ever could
+      <a class="song" href="https://www.youtube.com/watch?v=xWLFq5F3C8o" target="_blank" rel="noopener noreferrer">&ldquo;Dead!&rdquo;</a>
+      because Gerard could scream louder than they ever could
       &mdash; but somehow, his screaming never scared me.
     </p>
     <p class="fx">
-      Ever since I was ten years old, <em>The Black Parade</em> has been my favorite album.
+      Ever since I was ten years old, <a class="song album" href="https://www.youtube.com/watch?v=3FWCAsZ6AUI" target="_blank" rel="noopener noreferrer">The Black Parade</a> has been my favorite album.
       Twenty years later, I used my big-girl-adult-money to watch them play it live in
       Florence, Italy, with my fianc&eacute;. Life has a beautiful way of coming full circle.
     </p>
@@ -269,13 +271,13 @@
     <p class="fx">
       This website&rsquo;s name &mdash; <span class="acr-name">ISYLNTMWWITINS</span> &mdash;
       comes from the bridge of
-      <a class="song" href="https://www.youtube.com/watch?v=8bbTtPL1jRs" target="_blank" rel="noopener noreferrer">&ldquo;Famous&nbsp;Last&nbsp;Words&rdquo;</a>:
+      <a class="song" href="https://www.youtube.com/watch?v=8bbTtPL1jRs" target="_blank" rel="noopener noreferrer">&ldquo;Famous Last Words&rdquo;</a>:
     </p>
     <p class="lyric fx">I see you lying next to me, with words I thought I&rsquo;d never speak.</p>
     <p class="aside fx">Arguably one of the most powerful lines in the band&rsquo;s history.</p>
 
     <p class="closer fx">
-      This is a My Chemical Romance appreciation page &mdash; by a fan, for other fans.
+      This is a <a class="song" href="https://www.youtube.com/channel/UCCZGYab5SpD0I7Z5JqJZgww" target="_blank" rel="noopener noreferrer">My Chemical Romance</a> appreciation page &mdash; by a fan, for other fans.
       <span class="signoff">not affiliated <span class="sep">·</span> just grateful <span class="sep">·</span> forever</span>
     </p>
   </section>
