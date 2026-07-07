@@ -62,10 +62,13 @@
       margin: clamp(0.6rem, 1.6vh, 1.1rem) 0 clamp(1.8rem, 5vh, 3.2rem);
     }
 
-    /* ---- the monument ---- */
+    /* ---- the monument: acronym that unfolds into the lyric in place ---- */
     .monument {
-      display: grid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 100%;
+      min-height: 3.9em;                 /* reserve ~3 lines so nothing jumps */
       background: none;
       border: 0;
       cursor: pointer;
@@ -74,35 +77,33 @@
       font-weight: 500;
       margin-top: clamp(0.9rem, 2.4vh, 1.6rem);
       -webkit-tap-highlight-color: transparent;
+      transition: color 0.6s ease;
     }
     .monument:focus-visible { outline: 1px dashed var(--red); outline-offset: 10px; }
 
-    .layer {
-      grid-area: 1 / 1;
-      align-self: center;
-      justify-self: center;
-      transition: opacity 0.35s ease, filter 0.35s ease, transform 0.35s ease;
+    .mono-inner {
+      font-size: clamp(1.5rem, 6vw, 5rem);
+      line-height: 1.24;
+      letter-spacing: 0.01em;
+      word-spacing: -0.6em;              /* collapsed: gaps closed → the acronym */
+      transition: word-spacing 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
-    .layer-code {
-      font-size: clamp(2.2rem, 9.5vw, 10rem);
-      line-height: 1.1;
-      letter-spacing: 0.005em;
-      white-space: nowrap;
-    }
-    .layer-lyric {
-      font-size: clamp(1.3rem, 4.2vw, 4.4rem);
-      line-height: 1.28;
-      text-wrap: balance;
-      max-width: 24ch;
+    .w  { white-space: nowrap; }         /* a word never splits from its letter */
+    .r {
+      display: inline-block;
+      max-width: 0;
       opacity: 0;
-      pointer-events: none;
-      color: var(--ink);
+      overflow: hidden;
+      white-space: nowrap;
+      vertical-align: bottom;
+      transition: max-width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
+      transition-delay: calc(var(--i) * 28ms);
     }
-    .layer-lyric .w { white-space: nowrap; }
-    .layer-lyric b { font-weight: 500; color: var(--red); }
 
-    .monument.open .layer-code  { opacity: 0; filter: blur(8px); transform: scale(0.985); }
-    .monument.open .layer-lyric { opacity: 1; }
+    /* open: colour eases red → bone, each word unfurls from its letter */
+    .monument.open { color: var(--ink); }
+    .monument.open .mono-inner { word-spacing: 0.02em; }
+    .monument.open .r { max-width: 20ch; opacity: 1; }
 
     .caption {
       display: block;
@@ -195,7 +196,7 @@
       .rise { animation: none; opacity: 1; transform: none; }
       .js .fx { transition: none; opacity: 1; transform: none; }
       .cue .arrow { animation: none; }
-      .layer { transition: opacity 0.25s ease; filter: none !important; transform: none !important; }
+      .mono-inner, .r, .monument { transition-duration: 0.001s !important; transition-delay: 0s !important; }
     }
   </style>
 </head>
@@ -207,8 +208,7 @@
 
     <button class="monument rise" id="monument" type="button" style="--d:.55s" aria-expanded="false"
             aria-label="ISYLNTMWWITINS — I see you lying next to me with words I thought I'd never speak">
-      <span class="layer layer-code" aria-hidden="true">ISYLNTMWWITINS.</span>
-      <span class="layer layer-lyric" aria-hidden="true"><span class="w"><b>I</b></span> <span class="w"><b>S</b><span class="r">ee</span></span> <span class="w"><b>Y</b><span class="r">ou</span></span> <span class="w"><b>L</b><span class="r">ying</span></span> <span class="w"><b>N</b><span class="r">ext</span></span> <span class="w"><b>T</b><span class="r">o</span></span> <span class="w"><b>M</b><span class="r">e</span></span> <span class="w"><b>W</b><span class="r">ith</span></span> <span class="w"><b>W</b><span class="r">ords</span></span> <span class="w"><b>I</b></span> <span class="w"><b>T</b><span class="r">hought</span></span> <span class="w"><b>I</b><span class="r">&rsquo;d</span></span> <span class="w"><b>N</b><span class="r">ever</span></span> <span class="w"><b>S</b><span class="r">peak</span></span><b>.</b></span>
+      <span class="mono-inner" aria-hidden="true"><span class="w">I</span> <span class="w">S<span class="r" style="--i:1">ee</span></span> <span class="w">Y<span class="r" style="--i:2">ou</span></span> <span class="w">L<span class="r" style="--i:3">ying</span></span> <span class="w">N<span class="r" style="--i:4">ext</span></span> <span class="w">T<span class="r" style="--i:5">o</span></span> <span class="w">M<span class="r" style="--i:6">e</span></span> <span class="w">W<span class="r" style="--i:7">ith</span></span> <span class="w">W<span class="r" style="--i:8">ords</span></span> <span class="w">I</span> <span class="w">T<span class="r" style="--i:10">hought</span></span> <span class="w">I<span class="r" style="--i:11">&rsquo;d</span></span> <span class="w">N<span class="r" style="--i:12">ever</span></span> <span class="w">S<span class="r" style="--i:13">peak</span></span>.</span>
     </button>
 
     <span class="caption rise" id="caption" style="--d:.75s">hover to translate</span>
@@ -253,47 +253,21 @@
       var canHover = window.matchMedia("(hover: hover)").matches;
       if (!canHover && cap) cap.textContent = "tap to translate";
 
-      /* ---- decode scramble ---- */
-      var rests = Array.prototype.slice.call(btn.querySelectorAll(".r"));
-      rests.forEach(function (r) { r.dataset.final = r.textContent; });
-
-      var GLYPHS = "ABCDEFGHIJKLMNPQRSTUVWXYZ0123456789#%&*/+<>";
-      var gen = 0, isOpen = false;
-      function randStr(n) { var s = ""; for (var i = 0; i < n; i++) s += GLYPHS[(Math.random() * GLYPHS.length) | 0]; return s; }
-
-      function decode(myGen) {
-        rests.forEach(function (r, idx) {
-          var final = r.dataset.final || "";
-          if (!final.length) return;
-          var t0 = performance.now(), delay = idx * 38, dur = 300;
-          function step(now) {
-            if (myGen !== gen || !isOpen) return;
-            var t = now - t0 - delay;
-            if (t < 0) { r.textContent = randStr(final.length); requestAnimationFrame(step); return; }
-            var p = Math.min(1, t / dur), reveal = Math.floor(p * final.length), out = final.slice(0, reveal);
-            for (var i = reveal; i < final.length; i++) out += GLYPHS[(Math.random() * GLYPHS.length) | 0];
-            r.textContent = out;
-            if (p < 1) requestAnimationFrame(step); else r.textContent = final;
-          }
-          requestAnimationFrame(step);
-        });
-      }
-
+      /* the reveal is pure CSS unfold — JS only toggles state */
+      var isOpen = false;
       function open() {
         if (isOpen) return;
-        isOpen = true; gen++;
+        isOpen = true;
         btn.classList.add("open");
         btn.setAttribute("aria-expanded", "true");
         if (cap) cap.classList.add("is-hidden");
-        if (!reduce) decode(gen);
       }
       function close() {
         if (!isOpen) return;
-        isOpen = false; gen++;
+        isOpen = false;
         btn.classList.remove("open");
         btn.setAttribute("aria-expanded", "false");
         if (cap) cap.classList.remove("is-hidden");
-        rests.forEach(function (r) { r.textContent = r.dataset.final; });
       }
 
       /* pointer-aware: mouse hovers; touch/pen and keyboard toggle */
