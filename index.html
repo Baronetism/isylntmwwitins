@@ -322,7 +322,7 @@
       function onReveal() { scrollAmt = window.scrollY / dist; render(); }   // sync: only writes styles
 
       function tween() {
-        hoverAmt += (hoverTarget - hoverAmt) * 0.2;
+        hoverAmt += (hoverTarget - hoverAmt) * 0.07;      // lower = slower, more gradual hover
         if (Math.abs(hoverTarget - hoverAmt) < 0.004) { hoverAmt = hoverTarget; tweening = false; }
         render();
         if (tweening) requestAnimationFrame(tween);
