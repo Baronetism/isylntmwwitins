@@ -312,8 +312,10 @@
       // time the sentence sits at the very top with nothing above it.
       var dist = 1;
       function computeDist() {
-        var r = btn.getBoundingClientRect();
-        dist = Math.max(160, r.top + window.scrollY);
+        // fully open just before the "I love you" line reaches the top of the screen
+        var eng = document.querySelector(".english");
+        var r = (eng || btn).getBoundingClientRect();
+        dist = Math.max(140, (r.top + window.scrollY) * 0.9);
       }
       function onReveal() { applyReveal(window.scrollY / dist); }   // sync: only writes styles, no layout reads
       computeDist();
