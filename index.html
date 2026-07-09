@@ -73,7 +73,7 @@
       width: 100%;
       background: none;
       border: 0;
-      cursor: default;
+      cursor: pointer;
       color: var(--red);
       font-family: var(--mono);
       font-weight: 500;
@@ -310,14 +310,28 @@
       // reveal spans exactly the distance the sentence must travel to reach the top of
       // the screen — so it starts on the first pixel of scroll and is fully open by the
       // time the sentence sits at the very top with nothing above it.
-      var dist = 1;
+      var dist = 1, scrollAmt = 0, hoverAmt = 0, hoverTarget = 0, tweening = false;
       function computeDist() {
         // fully open just before the "I love you" line reaches the top of the screen
         var eng = document.querySelector(".english");
         var r = (eng || btn).getBoundingClientRect();
         dist = Math.max(140, (r.top + window.scrollY) * 0.9);
       }
-      function onReveal() { applyReveal(window.scrollY / dist); }   // sync: only writes styles, no layout reads
+      // the reveal is the greater of scroll progress and the hover tween — so both work
+      function render() { applyReveal(scrollAmt > hoverAmt ? scrollAmt : hoverAmt); }
+      function onReveal() { scrollAmt = window.scrollY / dist; render(); }   // sync: only writes styles
+
+      function tween() {
+        hoverAmt += (hoverTarget - hoverAmt) * 0.2;
+        if (Math.abs(hoverTarget - hoverAmt) < 0.004) { hoverAmt = hoverTarget; tweening = false; }
+        render();
+        if (tweening) requestAnimationFrame(tween);
+      }
+      function setHover(t) { hoverTarget = t; if (!tweening) { tweening = true; requestAnimationFrame(tween); } }
+      // hovering the text (mouse only) also opens it, like before
+      btn.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") setHover(1); });
+      btn.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") setHover(0); });
+
       computeDist();
       window.addEventListener("resize", function () { computeDist(); onReveal(); }, { passive: true });
       window.addEventListener("scroll", onReveal, { passive: true });
