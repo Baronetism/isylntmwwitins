@@ -73,7 +73,7 @@
       width: 100%;
       background: none;
       border: 0;
-      cursor: pointer;
+      cursor: default;
       color: var(--red);
       font-family: var(--mono);
       font-weight: 500;
@@ -95,23 +95,16 @@
 
     .mono-inner {
       word-spacing: -0.6em;              /* collapsed: gaps closed → the acronym */
-      transition: word-spacing 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
     .w  { white-space: nowrap; }         /* a word never splits from its letter */
-    .r {
+    .r {                                  /* JS scrubs max-width + opacity from scroll */
       display: inline-block;
       max-width: 0;
       opacity: 0;
       overflow: hidden;
       white-space: nowrap;
       vertical-align: bottom;
-      transition: max-width 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease;
-      transition-delay: calc(var(--i) * 28ms);
     }
-
-    /* open: each word unfurls from its letter — stays red throughout */
-    .monument.open .mono-inner { word-spacing: 0.02em; }
-    .monument.open .r { max-width: 20ch; opacity: 1; }
 
     .caption {
       display: block;
@@ -282,41 +275,45 @@
       var cap = document.getElementById("caption");
       var cue = document.getElementById("cue");
 
-      var reduce   = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      var canHover = window.matchMedia("(hover: hover)").matches;
-      if (!canHover && cap) cap.textContent = "tap to translate";
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (cap) cap.textContent = "scroll to translate";
 
-      /* the reveal is pure CSS unfold — JS only toggles state */
-      var isOpen = false;
-      var counted = false;
-      function open() {
-        if (isOpen) return;
-        isOpen = true;
-        btn.classList.add("open");
-        btn.setAttribute("aria-expanded", "true");
-        if (cap) cap.classList.add("is-hidden");
-        // count how many visitors discover the reveal (once per visit)
-        if (!counted && window.goatcounter && window.goatcounter.count) {
+      /* scroll-scrubbed reveal: the acronym unfolds into the lyric as you scroll,
+         word by word — same behaviour on desktop and mobile */
+      var inner = btn.querySelector(".mono-inner");
+      var rests = Array.prototype.slice.call(btn.querySelectorAll(".r"));
+      rests.forEach(function (r) { r._len = (r.textContent || "").length; });
+      var M = rests.length, WIN = 0.5, WS_CLOSED = -0.6, WS_OPEN = 0.02;
+      var counted = false, capHidden = false;
+
+      function applyReveal(a) {
+        a = a < 0 ? 0 : (a > 1 ? 1 : a);
+        if (reduce) a = a > 0.12 ? 1 : 0;                 // no continuous scrub if reduced-motion
+        inner.style.wordSpacing = (WS_CLOSED + (WS_OPEN - WS_CLOSED) * a) + "em";
+        for (var i = 0; i < M; i++) {
+          var start = (i / M) * (1 - WIN);                // each word opens over its own slice
+          var t = (a - start) / WIN;
+          t = t < 0 ? 0 : (t > 1 ? 1 : t);
+          rests[i].style.maxWidth = (t * (rests[i]._len + 0.4)) + "ch";
+          rests[i].style.opacity = t;
+        }
+        var open = a > 0.98;
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+        var hide = a > 0.04;
+        if (cap && hide !== capHidden) { capHidden = hide; cap.classList.toggle("is-hidden", hide); }
+        if (open && !counted && window.goatcounter && window.goatcounter.count) {
           counted = true;
           window.goatcounter.count({ path: "lyric-revealed", title: "Lyric revealed", event: true });
         }
       }
-      function close() {
-        if (!isOpen) return;
-        isOpen = false;
-        btn.classList.remove("open");
-        btn.setAttribute("aria-expanded", "false");
-        if (cap) cap.classList.remove("is-hidden");
-      }
 
-      /* pointer-aware: mouse hovers; touch/pen and keyboard toggle */
-      var lastPT = "mouse";
-      btn.addEventListener("pointerdown",  function (e) { lastPT = e.pointerType || "mouse"; });
-      btn.addEventListener("pointerenter", function (e) { if (e.pointerType === "mouse") open(); });
-      btn.addEventListener("pointerleave", function (e) { if (e.pointerType === "mouse") close(); });
-      btn.addEventListener("click", function (e) {
-        if (e.detail === 0 || lastPT !== "mouse") { isOpen ? close() : open(); }
-      });
+      var dist = 1;
+      function computeDist() { dist = Math.max(140, window.innerHeight * 0.5); }
+      function onReveal() { applyReveal(window.scrollY / dist); }   // sync: only writes styles, no layout reads
+      computeDist();
+      window.addEventListener("resize", function () { computeDist(); onReveal(); }, { passive: true });
+      window.addEventListener("scroll", onReveal, { passive: true });
+      onReveal();
 
       /* scroll cue */
       if (cue) {
