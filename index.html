@@ -283,7 +283,7 @@
       var inner = btn.querySelector(".mono-inner");
       var rests = Array.prototype.slice.call(btn.querySelectorAll(".r"));
       rests.forEach(function (r) { r._len = (r.textContent || "").length; });
-      var M = rests.length, WIN = 0.5, WS_CLOSED = -0.6, WS_OPEN = 0.02;
+      var M = rests.length, WIN = 0.72, WS_CLOSED = -0.6, WS_OPEN = 0.02;
       var counted = false, capHidden = false;
 
       function applyReveal(a) {
@@ -307,12 +307,20 @@
         }
       }
 
+      // reveal spans exactly the distance the sentence must travel to reach the top of
+      // the screen — so it starts on the first pixel of scroll and is fully open by the
+      // time the sentence sits at the very top with nothing above it.
       var dist = 1;
-      function computeDist() { dist = Math.max(140, window.innerHeight * 0.5); }
+      function computeDist() {
+        var r = btn.getBoundingClientRect();
+        dist = Math.max(160, r.top + window.scrollY);
+      }
       function onReveal() { applyReveal(window.scrollY / dist); }   // sync: only writes styles, no layout reads
       computeDist();
       window.addEventListener("resize", function () { computeDist(); onReveal(); }, { passive: true });
       window.addEventListener("scroll", onReveal, { passive: true });
+      window.addEventListener("load", function () { computeDist(); onReveal(); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { computeDist(); onReveal(); });
       onReveal();
 
       /* scroll cue */
