@@ -283,7 +283,8 @@
       var inner = btn.querySelector(".mono-inner");
       var rests = Array.prototype.slice.call(btn.querySelectorAll(".r"));
       rests.forEach(function (r) { r._len = (r.textContent || "").length; });
-      var M = rests.length, WIN = 0.72, WS_CLOSED = -0.6, WS_OPEN = 0.02;
+      var M = rests.length, WS_CLOSED = -0.6, WS_OPEN = 0.02;
+      var WORD_SPAN = 0.9, STEP = (1 - WORD_SPAN) / (M - 1);   // wide overlap → near-linear, smooth reveal
       var counted = false, capHidden = false;
 
       function applyReveal(a) {
@@ -291,8 +292,8 @@
         if (reduce) a = a > 0.12 ? 1 : 0;                 // no continuous scrub if reduced-motion
         inner.style.wordSpacing = (WS_CLOSED + (WS_OPEN - WS_CLOSED) * a) + "em";
         for (var i = 0; i < M; i++) {
-          var start = (i / M) * (1 - WIN);                // each word opens over its own slice
-          var t = (a - start) / WIN;
+          var start = i * STEP;                           // evenly staggered → smooth constant-rate wipe
+          var t = (a - start) / WORD_SPAN;
           t = t < 0 ? 0 : (t > 1 ? 1 : t);
           rests[i].style.maxWidth = (t * (rests[i]._len + 0.4)) + "ch";
           rests[i].style.opacity = t;
