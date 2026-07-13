@@ -198,6 +198,39 @@
     }
     .signoff .sep { color: var(--red); }
 
+    /* ---- favourite lyrics ---- */
+    .faves { margin-top: clamp(3rem, 8vh, 5rem); }
+    .faves .fave-kicker {
+      display: block;
+      font-family: var(--mono);
+      font-size: clamp(0.58rem, 0.9vw, 0.7rem);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--soft);
+      margin-bottom: clamp(1.6rem, 4vh, 2.6rem);
+    }
+    .faves .song-title {
+      display: block;
+      margin-top: clamp(1.8rem, 4vh, 2.6rem);
+      font-family: var(--mono);
+      font-size: clamp(0.6rem, 0.9vw, 0.72rem);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .faves .song-title a { color: var(--red); text-decoration: none; }
+    .faves .song-title a:hover, .faves .song-title a:focus-visible {
+      color: var(--red-hot); text-decoration: underline; text-underline-offset: 0.2em; outline: none;
+    }
+    .faves .q {
+      font-style: italic;
+      color: var(--ink);
+      font-size: clamp(1rem, 1.4vw, 1.25rem);
+      line-height: 1.55;
+      margin-top: 0.5em;
+    }
+    .faves .q + .q { margin-top: 0.35em; }
+    .faves .q.todo { color: var(--soft); font-style: normal; }   /* placeholder — replace me */
+
     /* ================= motion ================= */
     .rise {
       opacity: 0;
@@ -272,7 +305,79 @@
       <a class="song" href="https://www.youtube.com/watch?v=8bbTtPL1jRs" target="_blank" rel="noopener noreferrer">&ldquo;Famous Last Words&rdquo;</a>:
     </p>
     <p class="lyric fx">I see you lying next to me, with words I thought I&rsquo;d never speak.</p>
-    <p class="fx">Fourteen letters for fourteen words &mdash; one of the most quietly devastating lines they ever wrote.</p>
+    <p class="fx">Fourteen letters for fourteen words &mdash; a line that is a whole love letter.</p>
+
+    <!-- ============================================================
+         FAVORITE LYRICS — songs are linked & styled for you.
+         TO FILL IN: replace each  — your line —  with the lyric from
+         your (spell-corrected) Excel. Leave the rest as is.
+         ============================================================ -->
+    <div class="faves" hidden>
+      <span class="fave-kicker fx">a few of my favorite lines</span>
+
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+The+End" target="_blank" rel="noopener noreferrer">The End</a></span>
+        <p class="q todo">— your line —</p>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/watch?v=xWLFq5F3C8o" target="_blank" rel="noopener noreferrer">Dead!</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+This+Is+How+I+Disappear" target="_blank" rel="noopener noreferrer">This Is How I Disappear</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+The+Sharpest+Lives" target="_blank" rel="noopener noreferrer">The Sharpest Lives</a></span>
+        <p class="q todo">— your line —</p>
+        <p class="q todo">— your line —</p>
+        <p class="q todo">— your line —</p>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/watch?v=RRKJiM9Njr8" target="_blank" rel="noopener noreferrer">Welcome to the Black Parade</a></span>
+        <p class="q todo">— your line —</p>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+I+Dont+Love+You" target="_blank" rel="noopener noreferrer">I Don&rsquo;t Love You</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+House+of+Wolves" target="_blank" rel="noopener noreferrer">House of Wolves</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+Cancer" target="_blank" rel="noopener noreferrer">Cancer</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+Mama" target="_blank" rel="noopener noreferrer">Mama</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+Sleep" target="_blank" rel="noopener noreferrer">Sleep</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+Teenagers" target="_blank" rel="noopener noreferrer">Teenagers</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+Disenchanted" target="_blank" rel="noopener noreferrer">Disenchanted</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/watch?v=8bbTtPL1jRs" target="_blank" rel="noopener noreferrer">Famous Last Words</a></span>
+        <p class="q todo">— your line —</p>
+        <p class="q todo">— your line —</p>
+      </div>
+      <div class="fx">
+        <span class="song-title"><a href="https://www.youtube.com/results?search_query=My+Chemical+Romance+Blood" target="_blank" rel="noopener noreferrer">Blood</a></span>
+        <p class="q todo">— your line —</p>
+      </div>
+    </div>
 
     <p class="closer fx">
       A <a class="song" href="https://www.youtube.com/channel/UCCZGYab5SpD0I7Z5JqJZgww" target="_blank" rel="noopener noreferrer">My Chemical Romance</a> appreciation page &mdash; made by one fan, for the rest of us who never left.
