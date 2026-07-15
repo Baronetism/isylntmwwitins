@@ -65,7 +65,8 @@
       font-size: clamp(2.8rem, 7vw, 5.4rem);
       line-height: 1.02;
       color: var(--ink);
-      margin: clamp(0.4rem, 1vh, 0.7rem) 0 clamp(1.6rem, 3.6vh, 2.4rem);
+      /* small gap above ("In English we say"), big gap below (before "In Emo we say") */
+      margin: clamp(0.7rem, 1.8vh, 1.05rem) 0 clamp(2.8rem, 6.4vh, 4rem);
     }
 
     /* ---- the monument: acronym that unfolds into the lyric in place ---- */
@@ -82,7 +83,7 @@
       color: var(--red);
       font-family: var(--mono);
       font-weight: 500;
-      margin-top: clamp(0.4rem, 1vh, 0.7rem);
+      margin-top: clamp(0.7rem, 1.8vh, 1.05rem);
       -webkit-tap-highlight-color: transparent;
     }
     .monument:focus-visible { outline: 1px dashed var(--red); outline-offset: 10px; }
