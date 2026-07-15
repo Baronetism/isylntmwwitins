@@ -1,2 +1,5 @@
 .DS_Store
 .claude/
+
+# working files, not part of the site
+*.xlsx
