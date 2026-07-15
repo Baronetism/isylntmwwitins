@@ -238,9 +238,14 @@
     .faves .q.todo { color: var(--soft); font-style: normal; }   /* placeholder — replace me */
 
     /* ================= share your story ================= */
+    /* the "your story" CTA now sits first, right after the hero */
     .share {
+      margin-top: clamp(1.5rem, 4vh, 2.5rem);
+    }
+    /* divider that opens the "my story" section below the CTA */
+    .kicker-divided {
       margin-top: clamp(3rem, 8vh, 5rem);
-      padding-top: clamp(2.4rem, 6vh, 3.6rem);
+      padding-top: clamp(2.6rem, 7vh, 4rem);
       border-top: 1px solid rgba(236, 230, 218, 0.12);
     }
     .share .share-kicker {
@@ -349,12 +354,13 @@
       font-size: clamp(0.6rem, 1.7vw, 0.7rem);
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--soft);
+      text-align: center;
+      color: var(--red);
       line-height: 1.9;
     }
     .site-foot a { color: var(--red); text-decoration: none; }
     .site-foot a:hover, .site-foot a:focus-visible { color: var(--red-hot); text-decoration: underline; outline: none; }
-    .site-foot .sep { opacity: 0.5; margin: 0 0.5em; }
+    .site-foot .sep { color: var(--red); opacity: 0.6; margin: 0 0.5em; }
     .dialog-submit {
       font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--bg); background: var(--red);
@@ -412,7 +418,17 @@
   </section>
 
   <section class="story">
-    <span class="kicker fx">the story</span>
+    <div class="share fx">
+      <span class="share-kicker">your story</span>
+      <p class="share-lead">
+        Over the years I&rsquo;ve heard so many beautiful stories of how MCR affected people&rsquo;s lives,
+        and I&rsquo;d love to collect and share them. If you want to tell me what this band has been for
+        you, I&rsquo;d love to share it here on this fan page &mdash; under your first name only.
+      </p>
+      <button class="share-btn" id="shareOpen" type="button" aria-haspopup="dialog">What&rsquo;s your MCR story?</button>
+    </div>
+
+    <span class="kicker kicker-divided fx">my story</span>
 
     <p class="fx">
       When my parents fought, I&rsquo;d put my headphones on and turn
@@ -522,16 +538,6 @@
       </div>
     </div>
 
-    <div class="share fx">
-      <span class="share-kicker">your turn</span>
-      <p class="share-lead">
-        Everyone carries this album differently. If My Chemical Romance marked your life too,
-        tell me &mdash; I read every one, and the stories that move me get posted right here,
-        so the rest of us who never left can find each other in them.
-      </p>
-      <button class="share-btn" id="shareOpen" type="button" aria-haspopup="dialog">What&rsquo;s your story?</button>
-    </div>
-
     <p class="closer fx">
       A <a class="song" href="https://www.youtube.com/channel/UCCZGYab5SpD0I7Z5JqJZgww" target="_blank" rel="noopener noreferrer">My Chemical Romance</a> appreciation page &mdash; made by one fan, for the rest of us who never left.
       <span class="signoff">we&rsquo;ll carry on</span>
@@ -558,12 +564,7 @@
           action="https://formspree.io/f/xkodonyk">
       <button class="dialog-close" id="storyClose" type="button" aria-label="Close">&times;</button>
 
-      <span class="dialog-kicker" id="dialogKicker">what&rsquo;s your story?</span>
-      <p class="dialog-lead">
-        Over the years I&rsquo;ve heard so many beautiful stories of how MCR affected people&rsquo;s lives,
-        and I&rsquo;d love to collect and share them. If you want to tell me what this band has been for
-        you, I&rsquo;d love to share it here on this fan page &mdash; under your first name only.
-      </p>
+      <span class="dialog-kicker" id="dialogKicker">what&rsquo;s your MCR story?</span>
 
       <label class="field">
         <span>First name / nickname</span>
